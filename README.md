@@ -38,10 +38,30 @@ echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
 ```
 
 # Setup Turtlebot3 
-Download Turtlebots package and setup
+Download Turtlebots package and setup [https://github.com/ROBOTIS-GIT/turtlebot3]
 ```
-sudo mkdir -p ~/turtlebot3/src
+sudo mkdir -p ~/turtlebot3_ws/src
 vcs import . < turtlebot3.repos
 colcon build --symlink-install
+```
+Setup the turtlebot3 environement
+```
+export GAZEBO_MODEL_PATH=~/turtlebot3_ws/src/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models >> ~/turtlebot3_ws/install/setup.bash
+export TURTLEBOT3_MODEL=waffle_pi >> ~/turtlebot3_ws/install/setup.bash
+echo "source ~/turtlebot3_ws/install/setup.bash" >> ~/.bashrc
+```
+Testing your turtlebot3 in ROS2. Others package needed ros-foxy-gazebo-ros-pkgs, ros-foxy-slam-toolbox and nav2_bringup.
+
+```
+ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```
+Above let you teleop and move your turtlebot3 around. Below is to SLAM and navigate your turtlebot3.
+```
+ros2 launch slam_toolbox online_async_launch.py
+ros2 run nav2_map_server map_saver_cli -f ~/my_map
+ros2 launch nav2_bringup bringup_launch.py use_sim_time:=True autostart:=True map:=/path/to/my_map.yaml
+ros2 run rviz2 rviz2 -d $(ros2 pkg prefix nav2_bringup)/share/nav2_bringup/rviz/nav2_default_view.rviz
+
 ```
 
