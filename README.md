@@ -81,4 +81,37 @@ ros2 launch nav2_bringup bringup_launch.py use_sim_time:=True autostart:=True ma
 ros2 run rviz2 rviz2 -d $(ros2 pkg prefix nav2_bringup)/share/nav2_bringup/rviz/nav2_default_view.rviz
 
 ```
-
+# Testing your own robot (my_robot)
+Display your robot in rviz2
+```
+ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:="$(xacro my_robot.xacro)"
+ros2 run joint_state_publisher_gui joint_state_publisher_gui
+ros2 run rviz2 rviz2
+rqt_graph
+```
+# Create your own robot package
+```
+mkdir -p ros2_ws/src
+cd ros_ws
+colcon build
+cd src
+ros2 pkg create my_robot_description
+```
+Goto CMakeList.txt, add the install folder
+```
+install (
+	DIRECTORY urdf
+	DESTINATION share/${PROJECT_NAME}/
+)
+```
+# Spawn your robot in Gazebo
+```
+ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:="$(xacro my_robot.xacro)"
+ros2 launch gazebo_ros gazebo_launch.py
+ros2 run gazebo_ros spawn_entity.py -topic robot_description -entity my_robot
+```
+# Publish topic to your robot
+```
+ros2 topic pub -1 /cmd_vel geometry_msgs/msg/Twist "{linear:{x: 0.0,y: 0.0,z: 0.0},angular:{x: 0.0,y: 0.0,z: 0.0}}"
+ros2 topic pub -1 /set_joint_trajectory trajectory_msgs/msg/JointTrajectory '{header:{frame_id: base_footprint_link}, joint_names: [arm_base_forearm_joint, forearm_hand_joint],points: [ {positions: {0.0, 0.0}} ]}'
+```
