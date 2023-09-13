@@ -1,6 +1,6 @@
 # 3 steps to install ROS2 and turtlebot3
-* Ubuntu focal version 20.04 (required)
-* Install ROS2 foxy (compatible with Ubuntu 20.04)
+* Ubuntu Jammy Jellyfish version 22.04 (required)
+* Install ROS2 humble (compatible with Ubuntu 22.04)
 * Setup Turtlebot3 
 
 
@@ -20,8 +20,7 @@ Download the ROS2 key and setup the key. Upload the key into the Authentication 
 sudo apt install software-properties-common
 sudo add-apt-repository universe
 sudo apt update && sudo apt install curl -y
-cd ~/Downloads
-sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg # may need to run on writable folder
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 ```
 
@@ -29,25 +28,43 @@ Install RO2 from the official repository and its development tools
 ```
 sudo apt update
 sudo apt upgrade
-sudo apt install ros-foxy-desktop python3-argcomplete
+sudo apt install ros-humble-desktop
 sudo apt install ros-dev-tools
 ```
 Environment setup
 ```
-echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
+echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+```
+
+Install Gazebo
+```
+
 ```
 
 # Setup Turtlebot3 
+Install the dependency
+```
+sudo apt install gazebo11
+sudo apt install ros-humble-gazebo-ros-pkgs
+sudo apt install ros-humble-cartographer 
+sudo apt install ros-humble-cartographer-ros
+sudo apt install ros-humble-navigation2 
+sudo apt install ros-humble-nav2-bringup
+```
 Download Turtlebots package and setup [https://github.com/ROBOTIS-GIT/turtlebot3]
 ```
 sudo mkdir -p ~/turtlebot3_ws/src
-vcs import . < turtlebot3.repos
+git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git -b humble-devel
+git clone https://github.com/ROBOTIS-GIT/turtlebot3.git -b humble-devel
+git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git -b humble-devel
+git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git -b humble-devel
+cd ~/turtlebot3_ws
 colcon build --symlink-install
 ```
 Setup the turtlebot3 environement
 ```
-export GAZEBO_MODEL_PATH=~/turtlebot3_ws/src/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models >> ~/turtlebot3_ws/install/setup.bash
-export TURTLEBOT3_MODEL=waffle_pi >> ~/turtlebot3_ws/install/setup.bash
+echo "export TURTLEBOT3_MODEL=waffle_pi" >> ~/.bashrc
+echo "export GAZEBO_MODEL_PATH=/home/twm/turtlebot3_ws/src/turtlebot3_simulations/turtlebot3_gazebo/models:/usr/share/gazebo-11/models:$GAZEBO_MODEL_PATH" >> ~/.bashrc
 echo "source ~/turtlebot3_ws/install/setup.bash" >> ~/.bashrc
 ```
 Testing your turtlebot3 in ROS2. Others package needed ros-foxy-gazebo-ros-pkgs, ros-foxy-slam-toolbox and nav2_bringup.
