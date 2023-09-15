@@ -117,4 +117,8 @@ ros2 topic pub -1 /set_joint_trajectory trajectory_msgs/msg/JointTrajectory '{he
 ```
 
 Arduino IDE setup:
+```
 http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino%20IDE%20Setup
+https://github.com/ohlr/braccio_arduino_ros_rviz/tree/master
+https://github.com/klintan/ros2_usb_camera
+```
