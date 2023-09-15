@@ -38,7 +38,7 @@ echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
 
 Install Gazebo
 ```
-
+sudo apt install gazebo
 ```
 
 # Setup Turtlebot3 
