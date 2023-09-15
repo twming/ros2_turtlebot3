@@ -115,3 +115,6 @@ ros2 run gazebo_ros spawn_entity.py -topic robot_description -entity my_robot
 ros2 topic pub -1 /cmd_vel geometry_msgs/msg/Twist "{linear:{x: 0.0,y: 0.0,z: 0.0},angular:{x: 0.0,y: 0.0,z: 0.0}}"
 ros2 topic pub -1 /set_joint_trajectory trajectory_msgs/msg/JointTrajectory '{header:{frame_id: base_footprint_link}, joint_names: [arm_base_forearm_joint, forearm_hand_joint],points: [ {positions: {0.0, 0.0}} ]}'
 ```
+
+Arduino IDE setup:
+http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino%20IDE%20Setup
