@@ -122,3 +122,11 @@ http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino%20IDE%20Setup
 https://github.com/ohlr/braccio_arduino_ros_rviz/tree/master
 https://github.com/klintan/ros2_usb_camera
 ```
+
+Braccio Arm :
+- M1 base degree, (0 - 180)
+- M2 shoulder degrees, (15 - 165)
+- M3 elbow degrees, (0 - 180)
+- M4 vertical wrist degrees, (0 - 180)
+- M5 rotatory wrist degrees, (0 - 180)
+- M6 gripper degrees, (10 - 73)
