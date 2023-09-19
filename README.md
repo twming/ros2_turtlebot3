@@ -130,3 +130,13 @@ Braccio Arm :
 - M4 vertical wrist degrees, (0 - 180)
 - M5 rotatory wrist degrees, (0 - 180)
 - M6 gripper degrees, (10 - 73)
+
+Braccio Arm ROS2 Command :
+```
+ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:="$(xacro braccio.urdf)"
+ros2 run joint_state_publisher_gui joint_state_publisher_gui
+ros2 run rviz2 rviz2
+ros2 run braccio_arm parse_and_publish 
+ros2 launch serial_driver serial_driver_bridge_node.launch.py
+```
+
