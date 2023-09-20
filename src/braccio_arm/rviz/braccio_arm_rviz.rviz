@@ -7,6 +7,8 @@ Panels:
         - /Global Options1
         - /Status1
         - /RobotModel1
+        - /TF1
+        - /TF1/Frames1
       Splitter Ratio: 0.5
     Tree Height: 549
   - Class: rviz_common/Selection
@@ -119,6 +121,48 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        base_link:
+          Value: true
+        gripper_base:
+          Value: false
+        gripper_fix:
+          Value: false
+        gripper_movable:
+          Value: false
+        link1:
+          Value: false
+        link2:
+          Value: false
+        link3:
+          Value: false
+        link4:
+          Value: false
+        link5:
+          Value: false
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        base_link:
+          link1:
+            link2:
+              link3:
+                link4:
+                  link5:
+                    gripper_base:
+                      gripper_fix:
+                        {}
+                      gripper_movable:
+                        {}
+      Update Interval: 0
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -172,18 +216,18 @@ Visualization Manager:
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: -0.04716509208083153
+        Y: -0.07104767113924026
+        Z: 0.08358899503946304
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.7803978323936462
+      Pitch: 0.9503978490829468
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.0553982257843018
+      Yaw: 4.105401515960693
     Saved: ~
 Window Geometry:
   Displays:
@@ -201,5 +245,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1200
-  X: 70
-  Y: 60
+  X: 454
+  Y: 27
