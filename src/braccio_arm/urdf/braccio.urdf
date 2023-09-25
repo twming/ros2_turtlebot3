@@ -19,6 +19,12 @@
       <material name="gray"/> 
       <origin rpy="0 0 0" xyz="0 0 -0.025"/>
     </visual>
+    <collision>
+      <geometry>
+        <box size="0.15 0.15 .05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 -0.025"/>
+    </collision>
   </link>
 
   <link name="link1">
@@ -28,6 +34,11 @@
       </geometry>
       <material name="orange"/> 
     </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://braccio_arm/meshes/base.stl"/>
+      </geometry>
+    </collision>
   </link>
 
   <link name="link2">
@@ -38,6 +49,12 @@
       <material name="orange"/>
       <origin rpy="0 0 0" xyz="0 0 -0.0505"/> 
     </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://braccio_arm/meshes/shoulder.stl"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 -0.0505"/> 
+    </collision>
   </link>
 
   <link name="link3">
@@ -48,6 +65,12 @@
       <material name="orange"/>
       <origin rpy="0 0 0" xyz="0 0 -0.1705"/> 
     </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://braccio_arm/meshes/elbow.stl"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 -0.1705"/> 
+    </collision>
   </link>
 
   <link name="link4">
@@ -58,6 +81,12 @@
       <material name="orange"/>
       <origin rpy="0 0 0" xyz="0 0 -0.2905"/> 
     </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://braccio_arm/meshes/wrist_pitch.stl"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 -0.2905"/> 
+    </collision>
   </link>
   
   <link name="link5">
@@ -68,6 +97,12 @@
       <material name="white"/>
       <origin rpy="0 0 0" xyz="0 0 -0.3505"/> 
     </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://braccio_arm/meshes/wrist_roll.stl"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 -0.3505"/> 
+    </collision>
   </link>
 
   <link name="gripper_base">
@@ -78,6 +113,12 @@
       <material name="white"/>
       <origin rpy="0 0 0" xyz="0 0 -0.357"/> 
     </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://braccio_arm/meshes/gripper_base.stl"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 -0.357"/> 
+    </collision>
   </link>
 
   <link name="gripper_fix">
@@ -88,6 +129,12 @@
       <material name="white"/>
       <origin rpy="0 0 0" xyz="0 0 -0.36399"/> 
     </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://braccio_arm/meshes/gripper_fix.stl"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 -0.36399"/> 
+    </collision>
   </link>
 
   <link name="gripper_movable">
@@ -98,6 +145,12 @@
       <material name="white"/>
       <origin rpy="0 0 0" xyz="-0.01559 0 -0.36399"/> 
     </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://braccio_arm/meshes/gripper_movable.stl"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="-0.01559 0 -0.36399"/> 
+    </collision>
   </link>
 
   <joint name="base" type="revolute">
