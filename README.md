@@ -42,16 +42,12 @@ sudo apt install gazebo
 ```
 
 # Setup Turtlebot3 
-Install the dependency
+Install from repository
 ```
-sudo apt install gazebo11
-sudo apt install ros-humble-gazebo-ros-pkgs
-sudo apt install ros-humble-cartographer 
-sudo apt install ros-humble-cartographer-ros
-sudo apt install ros-humble-navigation2 
-sudo apt install ros-humble-nav2-bringup
+sudo apt install ros-humble-turtlebot3
+sudo apt install ros-humble-turtlebot3-simulation
 ```
-Download Turtlebots package and setup [https://github.com/ROBOTIS-GIT/turtlebot3]
+Download Turtlebots package and build manually [https://github.com/ROBOTIS-GIT/turtlebot3]
 ```
 sudo mkdir -p ~/turtlebot3_ws/src
 git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git -b humble-devel
@@ -64,10 +60,9 @@ colcon build --symlink-install
 Setup the turtlebot3 environement
 ```
 echo "export TURTLEBOT3_MODEL=waffle_pi" >> ~/.bashrc
-echo "export GAZEBO_MODEL_PATH=/home/twm/turtlebot3_ws/src/turtlebot3_simulations/turtlebot3_gazebo/models:/usr/share/gazebo-11/models:$GAZEBO_MODEL_PATH" >> ~/.bashrc
-echo "source ~/turtlebot3_ws/install/setup.bash" >> ~/.bashrc
+echo "export GAZEBO_MODEL_PATH=/usr/share/gazebo-11/models:$GAZEBO_MODEL_PATH" >> ~/.bashrc
 ```
-Testing your turtlebot3 in ROS2. Others package needed ros-foxy-gazebo-ros-pkgs, ros-foxy-slam-toolbox and nav2_bringup.
+Testing your turtlebot3 in ROS2.
 
 ```
 ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py
@@ -87,6 +82,7 @@ Display your robot in rviz2
 ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:="$(xacro my_robot.xacro)"
 ros2 run joint_state_publisher_gui joint_state_publisher_gui
 ros2 run rviz2 rviz2
+ros2 run tf2_tools view_frames
 rqt_graph
 ```
 # Create your own robot package
@@ -138,5 +134,17 @@ ros2 run joint_state_publisher_gui joint_state_publisher_gui
 ros2 run rviz2 rviz2
 ros2 run braccio_arm parse_and_publish 
 ros2 launch serial_driver serial_driver_bridge_node.launch.py
+```
+Other useful packages:
+```
+sudo apt install ros-humble-serial-driver
+sudo apt install ros-humble-moveit
+sudo apt install ros-humble-moveit-resource-panda-description
+sudo apt install ros-humble-moveit-resource-panda-moveit-config
+sudo apt install ros-humble-urdf-tutorial
+sudo apt install ros-humble-tiago*
+sudo apt install ros-humble-controller-manager
+sudo apt install ros-humble-ros2-control
+sudo apt install ros-humble-ros2-controllers
 ```
 
