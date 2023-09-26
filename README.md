@@ -147,4 +147,8 @@ sudo apt install ros-humble-controller-manager
 sudo apt install ros-humble-ros2-control
 sudo apt install ros-humble-ros2-controllers
 ```
+MoveIt Tutorial
+```
+https://moveit.picknik.ai/main/doc/tutorials/tutorials.html
+```
 
