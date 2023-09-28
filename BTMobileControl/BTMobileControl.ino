@@ -2,6 +2,8 @@
 
 SoftwareSerial mySerial(4, 3); // RX, TX
 char cmd='s';
+int delayTime=10;
+int totalTime=50;
 
 void setup() {
   pinMode(5, OUTPUT);    // ENA
@@ -38,6 +40,13 @@ void loop() { // run over and over
     digitalWrite(9, LOW);
     digitalWrite(10, HIGH);
     digitalWrite(11, LOW);
+    delay(delayTime);
+    
+    digitalWrite(7, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(11, LOW);
+    delay(totalTime-delayTime);
     break;
   case 'x':
     //Backward
@@ -47,6 +56,13 @@ void loop() { // run over and over
     digitalWrite(9, HIGH);
     digitalWrite(10, LOW);
     digitalWrite(11, HIGH);
+    delay(delayTime);
+    
+    digitalWrite(7, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(11, LOW);
+    delay(totalTime-delayTime);
     break;
   case 'a':
     //Left
@@ -56,6 +72,13 @@ void loop() { // run over and over
     digitalWrite(9, LOW);
     digitalWrite(10, LOW);
     digitalWrite(11, HIGH);
+    delay(delayTime);
+    
+    digitalWrite(7, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(11, LOW);
+    delay(totalTime-delayTime);
     break;
   case 'd':
     //Right
@@ -65,6 +88,22 @@ void loop() { // run over and over
     digitalWrite(9, HIGH);
     digitalWrite(10, HIGH);
     digitalWrite(11, LOW);
+    delay(delayTime);
+    
+    digitalWrite(7, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(11, LOW);
+    delay(totalTime-delayTime);
+    break;
+  case '1':
+    delayTime=15;
+    break;
+  case '2':
+    delayTime=25;
+    break;
+  case '3':
+    delayTime=40;
     break;
   default:
     // Stop
@@ -77,7 +116,7 @@ void loop() { // run over and over
     break;
   }
 
-  delay(1000);
+  //delay(1000);
 }
 
 
