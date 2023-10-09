@@ -37,6 +37,7 @@ ament_python_install_package(${PROJECT_NAME})
 #install py executables
 install(PROGRAMS
   scripts/MobotReceiveNode.py
+  scripts/MobotBluetoothPublishNode.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
