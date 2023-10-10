@@ -36,55 +36,59 @@ class RobotReceiveKey(Node):
     def listener_callback(self, msg):
         self.get_logger().info('mobot receive : "%c"' % msg.data)
 
-        GPIO.output(LED,GPIO.HIGH)
+        if (GPIO.input(BUT)):
+            GPIO.output(LED,GPIO.HIGH)
 
-        match msg.data:
-            case 119: # Key W
-                self.get_logger().info('mobot move : FORWARD')
-                setMotor(GPIO.HIGH,GPIO.LOW,GPIO.HIGH,GPIO.LOW,0.025)
-                setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.025)
-                
-            case 120: # Key x
-                self.get_logger().info('mobot move : BACKWARD')
-                setMotor(GPIO.LOW,GPIO.HIGH,GPIO.LOW,GPIO.HIGH,0.025)
-                setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.025)
+            match msg.data:
+                case 119: # Key w
+                    self.get_logger().info('mobot move : FORWARD')
+                    setMotor(GPIO.HIGH,GPIO.LOW,GPIO.HIGH,GPIO.LOW,0.070)
+                    setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.01)
+                    
+                case 120: # Key x
+                    self.get_logger().info('mobot move : BACKWARD')
+                    setMotor(GPIO.LOW,GPIO.HIGH,GPIO.LOW,GPIO.HIGH,0.070)
+                    setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.010)
 
-            case 97: # Key a
-                self.get_logger().info('mobot move : LEFT')
-                setMotor(GPIO.HIGH,GPIO.LOW,GPIO.LOW,GPIO.HIGH,0.025)
-                setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.025)
-                
-            case 100: # Key d
-                self.get_logger().info('mobot move : RIGHT')
-                setMotor(GPIO.LOW,GPIO.HIGH,GPIO.HIGH,GPIO.LOW,0.025)
-                setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.025)
+                case 97: # Key a
+                    self.get_logger().info('mobot move : LEFT')
+                    setMotor(GPIO.LOW,GPIO.HIGH,GPIO.HIGH,GPIO.LOW,0.070)
+                    setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.01)
+                    
+                case 100: # Key d
+                    self.get_logger().info('mobot move : RIGHT')
+                    setMotor(GPIO.HIGH,GPIO.LOW,GPIO.LOW,GPIO.HIGH,0.070)
+                    setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.01)
 
-            case 101: # Key e
-                self.get_logger().info('mobot move : NORTH RIGHT')
-                setMotor(GPIO.HIGH,GPIO.LOW,GPIO.HIGH,GPIO.LOW,0.010)
-                setMotor(GPIO.LOW,GPIO.LOW,GPIO.HIGH,GPIO.LOW,0.030)
-                setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.010)
-                
-            case 113: # Key q
-                self.get_logger().info('mobot move : NORTH LEFT')
-                setMotor(GPIO.HIGH,GPIO.LOW,GPIO.HIGH,GPIO.LOW,0.010)
-                setMotor(GPIO.HIGH,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.030)
-                setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.010)
+                case 101: # Key e
+                    self.get_logger().info('mobot move : NORTH RIGHT')
+                    setMotor(GPIO.HIGH,GPIO.LOW,GPIO.LOW,GPIO.HIGH,0.020)
+                    setMotor(GPIO.HIGH,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.040)
+                    setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.01)
+                    
+                case 113: # Key q
+                    self.get_logger().info('mobot move : NORTH LEFT')
+                    setMotor(GPIO.LOW,GPIO.HIGH,GPIO.HIGH,GPIO.LOW,0.020)
+                    setMotor(GPIO.LOW,GPIO.LOW,GPIO.HIGH,GPIO.LOW,0.040)
+                    setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.01)
 
-            case 99: # Key c
-                self.get_logger().info('mobot move : SOUTH RIGHT')
-                setMotor(GPIO.LOW,GPIO.HIGH,GPIO.LOW,GPIO.HIGH,0.010)
-                setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.HIGH,0.030)
-                setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.010)
+                case 99: # Key c
+                    self.get_logger().info('mobot move : SOUTH RIGHT')
+                    setMotor(GPIO.LOW,GPIO.HIGH,GPIO.LOW,GPIO.HIGH,0.020)
+                    setMotor(GPIO.LOW,GPIO.HIGH,GPIO.LOW,GPIO.LOW,0.040)
+                    setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.01)
 
-            case 122: # Key z
-                self.get_logger().info('mobot move : SOUTH LEFT')
-                setMotor(GPIO.LOW,GPIO.HIGH,GPIO.LOW,GPIO.HIGH,0.010)
-                setMotor(GPIO.LOW,GPIO.HIGH,GPIO.LOW,GPIO.LOW,0.030)
-                setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.010)
+                case 122: # Key z
+                    self.get_logger().info('mobot move : SOUTH LEFT')
+                    setMotor(GPIO.LOW,GPIO.HIGH,GPIO.LOW,GPIO.HIGH,0.020)
+                    setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.HIGH,0.040)
+                    setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.01)
 
-            case 115: # Key x
-                self.get_logger().info('mobot move : STOP')
-                setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.010)
+                case 115: # Key s
+                    self.get_logger().info('mobot move : STOP')
+                    setMotor(GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW,0.010)
 
-        GPIO.output(LED,GPIO.LOW)
+            GPIO.output(LED,GPIO.LOW)
+
+        else:
+            self.get_logger().info('Please turn ON Keyboard Control')
