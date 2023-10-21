@@ -76,13 +76,20 @@ def main(args=None):
                     else:
                         GPIO.output(STATUS,GPIO.HIGH)
                         print('mobot STATE : Keyboard Control ON')
+                elif (key2=='3'):
+                    if (GPIO.input(BUT)):
+                        GPIO.output(STATUS,GPIO.LOW)
+                        print('mobot STATE : Keyboard Control OFF')
+                    else:
+                        GPIO.output(STATUS,GPIO.HIGH)
+                        print('mobot STATE : Keyboard Control ON')
                 continue
 
             case _:
                 continue
 
         mobot_bluetooth.publisher_.publish(message)
-        time.sleep(0.05)
+        time.sleep(0.08)
 
     # Destroy the node explicitly
     # (optional - otherwise it will be done automatically

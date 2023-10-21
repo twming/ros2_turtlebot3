@@ -24,9 +24,13 @@ set(dependencies
 add_executable(key_send src/KeyBoardSendNode.cpp)
 ament_target_dependencies(key_send ${dependencies})
 
+add_executable(bump_go src/BumpGoNode.cpp)
+ament_target_dependencies(bump_go ${dependencies})
+
 #install cpp executables
 install(TARGETS
   key_send
+  bump_go
   DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -38,6 +42,7 @@ ament_python_install_package(${PROJECT_NAME})
 install(PROGRAMS
   scripts/MobotReceiveNode.py
   scripts/MobotBluetoothPublishNode.py
+  scripts/MobotUltraSensePublishNode.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
