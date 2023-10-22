@@ -1,19 +1,12 @@
 #!/usr/bin/env python3
 
+import time
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Char
-import time
+import btwheelrobot.Common
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
-
-
-M1 = 7
-M2 = 8
-M3 = 9
-M4 = 10
-LED = 5
-BUT = 6
 
 def setMotor(S1,S2,S3,S4,timeInMs):
     GPIO.output(M1,S1)
@@ -22,10 +15,10 @@ def setMotor(S1,S2,S3,S4,timeInMs):
     GPIO.output(M4,S4)
     time.sleep(timeInMs)
 
-class RobotReceiveKey(Node):
+class MotorDriverClass(Node):
 
     def __init__(self):
-        super().__init__('mobot_receive')
+        super().__init__('motor_driver_node')
         self.subscription = self.create_subscription(
             Char,
             'key_out',

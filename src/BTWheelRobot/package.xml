@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>wheel_robot_teleop</name>
+  <name>btwheelrobot</name>
   <version>1.0.0</version>
   <description>Wheel Robot Keyboard Control</description>
   <maintainer email="hartagrow@gmail.com">twm</maintainer>

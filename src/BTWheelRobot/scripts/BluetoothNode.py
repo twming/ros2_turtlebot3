@@ -5,13 +5,10 @@ import serial
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Char
-from wheel_robot_teleop.BluetoothKey import BluetoothKey
+from btwheelrobot.BluetoothClass import BluetoothClass
+import btwheelrobot.Common
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
-
-BUT = 6
-STATUS = 13
-
 
 def main(args=None):
     GPIO.setmode(GPIO.BCM)
@@ -21,7 +18,7 @@ def main(args=None):
     ser=serial.Serial(port="/dev/ttyAMA0",baudrate=9600)
     
     rclpy.init(args=args)
-    mobot_bluetooth = BluetoothKey()
+    mobot_bluetooth = BluetoothClass()
 
     message=Char()
 

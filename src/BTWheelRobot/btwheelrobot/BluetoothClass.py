@@ -6,9 +6,9 @@ from std_msgs.msg import Char
 
 
 
-class BluetoothKey(Node):
+class BluetoothClass(Node):
 
     def __init__(self):
-        super().__init__('mobot_bt_publish')
+        super().__init__('bluetooth_node')
         self.publisher_ = self.create_publisher(Char, 'key_out', 10)
 

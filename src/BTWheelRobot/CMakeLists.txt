@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(wheel_robot_teleop)
+project(btwheelrobot)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -21,16 +21,16 @@ set(dependencies
   rclcpp
   std_msgs
 )
-add_executable(key_send src/KeyBoardSendNode.cpp)
-ament_target_dependencies(key_send ${dependencies})
+add_executable(keyboard_teleop_node src/KeyBoardNode.cpp)
+ament_target_dependencies(keyboard_teleop_node ${dependencies})
 
-add_executable(bump_go src/BumpGoNode.cpp)
-ament_target_dependencies(bump_go ${dependencies})
+add_executable(bump_go_node src/BumpGoNode.cpp)
+ament_target_dependencies(bump_go_node ${dependencies})
 
 #install cpp executables
 install(TARGETS
-  key_send
-  bump_go
+  keyboard_teleop_node
+  bump_go_node
   DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -40,9 +40,9 @@ ament_python_install_package(${PROJECT_NAME})
 
 #install py executables
 install(PROGRAMS
-  scripts/MobotReceiveNode.py
-  scripts/MobotBluetoothPublishNode.py
-  scripts/MobotUltraSensePublishNode.py
+  scripts/BluetoothNode.py
+  scripts/MotorDriverNode.py
+  scripts/UltrasonicSenseNode.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

@@ -3,17 +3,10 @@
 import time
 import rclpy
 from rclpy.node import Node
-from wheel_robot_teleop.RobotReceiveKey import RobotReceiveKey
+from btwheelrobot.MotorDriverClass import MotorDriverClass
+import btwheelrobot.Common
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
-
-M1 = 7
-M2 = 8
-M3 = 9
-M4 = 10
-LED = 5
-BUT = 6
-
 
 def main(args=None):
     GPIO.setmode(GPIO.BCM)
@@ -25,7 +18,7 @@ def main(args=None):
     GPIO.setup(BUT,GPIO.IN)
 
     rclpy.init(args=args)
-    mobot_receive = RobotReceiveKey()
+    mobot_receive = MotorDriverClass()
 
     rclpy.spin(mobot_receive)
 

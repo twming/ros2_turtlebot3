@@ -4,16 +4,10 @@ import time
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float32
-from wheel_robot_teleop.UltrasonicSense import UltrasonicSense
-
+from btwheelrobot.UltrasonicSenseClass import UltrasonicSense
+import btwheelrobot.Common
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
-
-
-TRIG = 17
-ECHO = 18
-
-#set GPIO direction (IN / OUT)
 
 
 def distance():

@@ -1,5 +1,0 @@
-<launch>
-    <node pkg="wheel_robot_teleop" exec="MobotReceiveNode.py" />
-    <node pkg="wheel_robot_teleop" exec="MobotBluetoothPublishNode.py" />
-    <node pkg="wheel_robot_teleop" exec="MobotUltraSensePublishNode.py" />
-</launch>
