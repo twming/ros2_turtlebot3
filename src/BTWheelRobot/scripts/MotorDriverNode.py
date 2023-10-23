@@ -4,18 +4,18 @@ import time
 import rclpy
 from rclpy.node import Node
 from btwheelrobot.MotorDriverClass import MotorDriverClass
-import btwheelrobot.Common
+import btwheelrobot.Common as gPin
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
 
 def main(args=None):
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(M1, GPIO.OUT)
-    GPIO.setup(M2, GPIO.OUT)
-    GPIO.setup(M3, GPIO.OUT)
-    GPIO.setup(M4, GPIO.OUT)
-    GPIO.setup(LED,GPIO.OUT)
-    GPIO.setup(BUT,GPIO.IN)
+    GPIO.setup(gPin.M1, GPIO.OUT)
+    GPIO.setup(gPin.M2, GPIO.OUT)
+    GPIO.setup(gPin.M3, GPIO.OUT)
+    GPIO.setup(gPin.M4, GPIO.OUT)
+    GPIO.setup(gPin.LED,GPIO.OUT)
+    GPIO.setup(gPin.BUT,GPIO.IN)
 
     rclpy.init(args=args)
     mobot_receive = MotorDriverClass()

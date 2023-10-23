@@ -4,29 +4,29 @@ import time
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float32
-from btwheelrobot.UltrasonicSenseClass import UltrasonicSense
-import btwheelrobot.Common
+from btwheelrobot.UltrasonicSenseClass import UltrasonicSenseClass
+import btwheelrobot.Common as gPin
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
 
 
 def distance():
     # set Trigger to HIGH
-    GPIO.output(TRIG, True)
+    GPIO.output(gPin.TRIG, True)
  
     # set Trigger after 0.01ms to LOW
     time.sleep(0.00001)
-    GPIO.output(TRIG, False)
+    GPIO.output(gPin.TRIG, False)
  
     StartTime = time.time()
     StopTime = time.time()
  
     # save StartTime
-    while GPIO.input(ECHO) == 0:
+    while GPIO.input(gPin.ECHO) == 0:
         StartTime = time.time()
  
     # save time of arrival
-    while GPIO.input(ECHO) == 1:
+    while GPIO.input(gPin.ECHO) == 1:
         StopTime = time.time()
  
     # time difference between start and arrival
@@ -40,11 +40,11 @@ def distance():
 
 def main(args=None):
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(TRIG, GPIO.OUT)
-    GPIO.setup(ECHO, GPIO.IN)
+    GPIO.setup(gPin.TRIG, GPIO.OUT)
+    GPIO.setup(gPin.ECHO, GPIO.IN)
     
     rclpy.init(args=args)
-    mobot_ultrasonic = UltrasonicSense()
+    mobot_ultrasonic = UltrasonicSenseClass()
 
     message=Float32()
 
@@ -55,7 +55,7 @@ def main(args=None):
             #time.sleep(1)
  
             mobot_ultrasonic.publisher_.publish(message)
-            time.sleep(0.2)
+            time.sleep(0.1)
 
         # Reset by pressing CTRL + C
     except KeyboardInterrupt:

@@ -6,15 +6,15 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Char
 from btwheelrobot.BluetoothClass import BluetoothClass
-import btwheelrobot.Common
+import btwheelrobot.Common as gPin
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
 
 def main(args=None):
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(STATUS,GPIO.OUT)
-    GPIO.setup(BUT,GPIO.IN) # STATUS Check
-    GPIO.output(STATUS,GPIO.HIGH) # BT Control
+    GPIO.setup(gPin.STATUS,GPIO.OUT)
+    GPIO.setup(gPin.BUT,GPIO.IN) # STATUS Check
+    GPIO.output(gPin.STATUS,GPIO.HIGH) # BT Control
     ser=serial.Serial(port="/dev/ttyAMA0",baudrate=9600)
     
     rclpy.init(args=args)
@@ -67,18 +67,18 @@ def main(args=None):
             
             case '0': # Check Key 2
                 if (key2=='4'):
-                    if (GPIO.input(BUT)):
-                        GPIO.output(STATUS,GPIO.LOW)
+                    if (GPIO.input(gPin.BUT)):
+                        GPIO.output(gPin.STATUS,GPIO.LOW)
                         print('mobot STATE : Keyboard Control OFF')
                     else:
-                        GPIO.output(STATUS,GPIO.HIGH)
+                        GPIO.output(gPin.STATUS,GPIO.HIGH)
                         print('mobot STATE : Keyboard Control ON')
                 elif (key2=='3'):
-                    if (GPIO.input(BUT)):
-                        GPIO.output(STATUS,GPIO.LOW)
+                    if (GPIO.input(gPin.BUT)):
+                        GPIO.output(gPin.STATUS,GPIO.LOW)
                         print('mobot STATE : Keyboard Control OFF')
                     else:
-                        GPIO.output(STATUS,GPIO.HIGH)
+                        GPIO.output(gPin.STATUS,GPIO.HIGH)
                         print('mobot STATE : Keyboard Control ON')
                 continue
 

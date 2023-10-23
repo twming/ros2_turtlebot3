@@ -1,0 +1,8 @@
+<launch>
+    <node pkg="btwheelrobot" exec="BluetoothNode.py" />
+    <node pkg="btwheelrobot" exec="MotorDriverNode.py" />
+    <node pkg="btwheelrobot" exec="UltrasonicSenseNode.py" />
+    <node pkg="btwheelrobot" exec="bump_go_node">
+        <remap from="/output_vel" to="/key_out"/>
+    </node>
+</launch>
