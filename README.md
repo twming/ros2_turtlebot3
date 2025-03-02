@@ -45,7 +45,7 @@ sudo apt install gazebo
 Install from repository
 ```
 sudo apt install ros-humble-turtlebot3
-sudo apt install ros-humble-turtlebot3-simulation
+sudo apt install ros-humble-turtlebot3-simulations
 ```
 Download Turtlebots package and build manually [https://github.com/ROBOTIS-GIT/turtlebot3]
 ```
