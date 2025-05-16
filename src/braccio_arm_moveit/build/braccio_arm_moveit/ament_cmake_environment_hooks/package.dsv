@@ -1,4 +1,0 @@
-source;share/braccio_arm_moveit/local_setup.bash
-source;share/braccio_arm_moveit/local_setup.dsv
-source;share/braccio_arm_moveit/local_setup.sh
-source;share/braccio_arm_moveit/local_setup.zsh
