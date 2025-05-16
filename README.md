@@ -1,154 +1,23 @@
-# 3 steps to install ROS2 and turtlebot3
-* Ubuntu Jammy Jellyfish version 22.04 (required)
-* Install ROS2 humble (compatible with Ubuntu 22.04)
-* Setup Turtlebot3 
+# software_setup
+software setup for ROS and docker
 
-
-# Install ROS2 foxy
-Check and set the locale of your computer
+### Enable SSH
 ```
-locale  # check for UTF-8
-sudo apt update && sudo apt install locales
-sudo locale-gen en_US en_US.UTF-8
-sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-export LANG=en_US.UTF-8
-locale  # verify settings
+sudo nano /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
 ```
-
-Download the ROS2 key and setup the key. Upload the key into the Authentication Library in Ubuntu. Setup the RO2 download repository
 ```
-sudo apt install software-properties-common
-sudo add-apt-repository universe
-sudo apt update && sudo apt install curl -y
-sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+PasswordAuthentication yes
 ```
-
-Install RO2 from the official repository and its development tools
+### Disable Auto Background Update
 ```
-sudo apt update
-sudo apt upgrade
-sudo apt install ros-humble-desktop
-sudo apt install ros-dev-tools
+sudo nano /etc/apt/apt.conf.d/20auto-upgrades
 ```
-Environment setup
 ```
-echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+APT::Periodic::Update-Package-Lists "0";
+APT::Periodic::Unattended-Upgrade "0";
 ```
-
-Install Gazebo
+### Stop the Network Wait, Suspend, Sleep
 ```
-sudo apt install gazebo
+sudo systemctl mask systemd-networkd-wait-online.service
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 ```
-
-# Setup Turtlebot3 
-Install from repository
-```
-sudo apt install ros-humble-turtlebot3
-sudo apt install ros-humble-turtlebot3-simulations
-```
-Download Turtlebots package and build manually [https://github.com/ROBOTIS-GIT/turtlebot3]
-```
-sudo mkdir -p ~/turtlebot3_ws/src
-git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git -b humble-devel
-git clone https://github.com/ROBOTIS-GIT/turtlebot3.git -b humble-devel
-git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git -b humble-devel
-git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git -b humble-devel
-cd ~/turtlebot3_ws
-colcon build --symlink-install
-```
-Setup the turtlebot3 environement
-```
-echo "export TURTLEBOT3_MODEL=waffle_pi" >> ~/.bashrc
-echo "export GAZEBO_MODEL_PATH=/usr/share/gazebo-11/models:$GAZEBO_MODEL_PATH" >> ~/.bashrc
-```
-Testing your turtlebot3 in ROS2.
-
-```
-ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py
-ros2 run teleop_twist_keyboard teleop_twist_keyboard
-```
-Above let you teleop and move your turtlebot3 around. Below is to SLAM and navigate your turtlebot3.
-```
-ros2 launch slam_toolbox online_async_launch.py
-ros2 run nav2_map_server map_saver_cli -f ~/my_map
-ros2 launch nav2_bringup bringup_launch.py use_sim_time:=True autostart:=True map:=/path/to/my_map.yaml
-ros2 run rviz2 rviz2 -d $(ros2 pkg prefix nav2_bringup)/share/nav2_bringup/rviz/nav2_default_view.rviz
-
-```
-# Testing your own robot (my_robot)
-Display your robot in rviz2
-```
-ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:="$(xacro my_robot.xacro)"
-ros2 run joint_state_publisher_gui joint_state_publisher_gui
-ros2 run rviz2 rviz2
-ros2 run tf2_tools view_frames
-rqt_graph
-```
-# Create your own robot package
-```
-mkdir -p ros2_ws/src
-cd ros_ws
-colcon build
-cd src
-ros2 pkg create my_robot_description
-```
-Goto CMakeList.txt, add the install folder
-```
-install (
-	DIRECTORY urdf
-	DESTINATION share/${PROJECT_NAME}/
-)
-```
-# Spawn your robot in Gazebo
-```
-ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:="$(xacro my_robot.xacro)"
-ros2 launch gazebo_ros gazebo_launch.py
-ros2 run gazebo_ros spawn_entity.py -topic robot_description -entity my_robot
-```
-# Publish topic to your robot
-```
-ros2 topic pub -1 /cmd_vel geometry_msgs/msg/Twist "{linear:{x: 0.0,y: 0.0,z: 0.0},angular:{x: 0.0,y: 0.0,z: 0.0}}"
-ros2 topic pub -1 /set_joint_trajectory trajectory_msgs/msg/JointTrajectory '{header:{frame_id: base_footprint_link}, joint_names: [arm_base_forearm_joint, forearm_hand_joint],points: [ {positions: {0.0, 0.0}} ]}'
-```
-
-Arduino IDE setup:
-```
-http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino%20IDE%20Setup
-https://github.com/ohlr/braccio_arduino_ros_rviz/tree/master
-https://github.com/klintan/ros2_usb_camera
-```
-
-Braccio Arm :
-- M1 base degree, (0 - 180)
-- M2 shoulder degrees, (15 - 165)
-- M3 elbow degrees, (0 - 180)
-- M4 vertical wrist degrees, (0 - 180)
-- M5 rotatory wrist degrees, (0 - 180)
-- M6 gripper degrees, (10 - 73)
-
-Braccio Arm ROS2 Command :
-```
-ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:="$(xacro braccio.urdf)"
-ros2 run joint_state_publisher_gui joint_state_publisher_gui
-ros2 run rviz2 rviz2
-ros2 run braccio_arm parse_and_publish 
-ros2 launch serial_driver serial_driver_bridge_node.launch.py
-```
-Other useful packages:
-```
-sudo apt install ros-humble-serial-driver
-sudo apt install ros-humble-moveit
-sudo apt install ros-humble-moveit-resource-panda-description
-sudo apt install ros-humble-moveit-resource-panda-moveit-config
-sudo apt install ros-humble-urdf-tutorial
-sudo apt install ros-humble-tiago*
-sudo apt install ros-humble-controller-manager
-sudo apt install ros-humble-ros2-control
-sudo apt install ros-humble-ros2-controllers
-```
-MoveIt Tutorial
-```
-https://moveit.picknik.ai/main/doc/tutorials/tutorials.html
-```
-
