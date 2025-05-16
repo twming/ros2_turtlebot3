@@ -1,5 +1,0 @@
-<launch>
-    <node pkg="btwheelrobot" exec="BluetoothNode.py" />
-    <node pkg="btwheelrobot" exec="MotorDriverNode.py" />
-    <node pkg="btwheelrobot" exec="UltrasonicSenseNode.py" />
-</launch>
