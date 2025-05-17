@@ -22,7 +22,8 @@ setup(
         'console_scripts': [
             "draw_circle=turtle_control.draw_circle:main",
             "pose_subscribe=turtle_control.pose_subscriber:main",
-            "turtle_controller=turtle_control.turtle_controller:main"
+            "turtle_controller=turtle_control.turtle_controller:main",
+            "turtlebot_auto_drive=turtle_control.turtlebot_auto_drive:main"
         ],
     },
 )
