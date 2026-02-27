@@ -19,6 +19,11 @@ sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install python3.10 python3.10-dev python3.10-venv
 pip install lerobot
 lerobot-info
+
+
+sudo apt update
+sudo apt install build-essential python3-dev
+pip install evdev
 ```
 
 Install scservo-sdk
