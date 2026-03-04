@@ -1,53 +1,51 @@
-How to assemble lerobot
-
+# How to assemble Lerobot
+- https://wiki.seeedstudio.com/lerobot_so100m_new/#introduction
 - https://www.youtube.com/watch?v=70GuJf2jbYk
-
 - https://huggingface.co/docs/lerobot/installation
-
 - https://github.com/huggingface/lerobot
-
 - https://github.com/Kotakku/FT_SCServo_Debug_Qt
 
 
-install python3.10
-------------------
+# Install python3.10 and Lerobot
+Install the dependency packages
 ```
-sudo apt install python3-dev python3-venv
-python3 -m venv lerobot-py310
-
-source lerobot-py310/bin/activate
-
+sudo apt update
 sudo apt install software-properties-common
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install python3.10 python3.10-dev python3.10-venv
+```
+
+Setup the lerobot-env
+```
+python3 -m venv lerobot-env
+source lerobot-env/bin/activate
+```
+
+Install lerobot
+```
 pip install lerobot
 lerobot-info
-
-
-sudo apt update
-sudo apt install build-essential python3-dev
-pip install evdev
 ```
 
 Install scservo-sdk
--------------------
 ```
 #pip install scservo-sdk
+#sudo apt install build-essential python3-dev
+#pip install evdev
+
 pip install 'lerobot[all]'          # All available features
 pip install 'lerobot[aloha,pusht]'  # Specific features (Aloha & Pusht)
 pip install 'lerobot[feetech]'      # Feetech motor support
 ```
-calibrate
----------
-https://www.youtube.com/watch?v=mQ7O73dEDcU
+
+# How to Calibrate
+- https://www.youtube.com/watch?v=mQ7O73dEDcU
 ```
 python -m lerobot.calibrate --teleop.type=so101_leader --teleop.port=/dev/ttyACM0 --teleop.id=leader
 
 python -m lerobot.calibrate --teleop.type=so101_follower --teleop.port=/dev/ttyACM1 --teleop.id=follower
 
-
-python -m lerobot.teleoperate --robot.type=so101_follower --robot.port=/dev/ttyACM1 --robot.id=follower 
---teleop.type=so101_leader --teleop.port=/dev/ttyACM0 --teleop.id=leader
+python -m lerobot.teleoperate --robot.type=so101_follower --robot.port=/dev/ttyACM1 --robot.id=follower --teleop.type=so101_leader --teleop.port=/dev/ttyACM0 --teleop.id=leader
 ```
 
 --robot.p_coefficient=8 (Lower = smoother, less responsive; Higher = more responsive, potentially jittery)
