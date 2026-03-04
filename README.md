@@ -1,5 +1,6 @@
 # How to assemble Lerobot
 - https://wiki.seeedstudio.com/lerobot_so100m_new/#introduction
+LeRobot SO-ARM101 Robotic Arm - Assembly and Setup Guide
 - https://www.youtube.com/watch?v=70GuJf2jbYk
 - https://huggingface.co/docs/lerobot/installation
 - https://github.com/huggingface/lerobot
