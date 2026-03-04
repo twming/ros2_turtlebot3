@@ -65,7 +65,7 @@ python -m lerobot.record
 --robot.type=so101_follower 
 --robot.port=/dev/ttyACM1 
 --robot.id=follower 
---robot.camera="{ wrist: {type: openCV, index_or_path: 0, width: 640, height: 480, fps: 30}, front: {type: openCV, index_or_path: 1, width: 640, height: 480, fps: 30}}"
+#--robot.camera="{ wrist: {type: openCV, index_or_path: 0, width: 640, height: 480, fps: 30}, front: {type: openCV, index_or_path: 1, width: 640, height: 480, fps: 30}}"
 --teleop.type=so101_leader 
 --teleop.port=/dev/ttyACM0 
 --teleop.id=leader
