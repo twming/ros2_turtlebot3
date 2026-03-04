@@ -41,11 +41,11 @@ pip install 'lerobot[feetech]'      # Feetech motor support
 # How to Calibrate
 - https://www.youtube.com/watch?v=mQ7O73dEDcU
 ```
-python -m lerobot.calibrate --teleop.type=so101_leader --teleop.port=/dev/ttyACM0 --teleop.id=leader
+lerobot-calibrate --teleop.type=so101_leader --teleop.port=/dev/ttyACM0 --teleop.id=leader
 
-python -m lerobot.calibrate --teleop.type=so101_follower --teleop.port=/dev/ttyACM1 --teleop.id=follower
+lerobot-calibrate --teleop.type=so101_follower --teleop.port=/dev/ttyACM1 --teleop.id=follower
 
-python -m lerobot.teleoperate --robot.type=so101_follower --robot.port=/dev/ttyACM1 --robot.id=follower --teleop.type=so101_leader --teleop.port=/dev/ttyACM0 --teleop.id=leader
+lerobot-teleoperate --robot.type=so101_follower --robot.port=/dev/ttyACM1 --robot.id=follower --teleop.type=so101_leader --teleop.port=/dev/ttyACM0 --teleop.id=leader
 ```
 
 --robot.p_coefficient=8 (Lower = smoother, less responsive; Higher = more responsive, potentially jittery)
