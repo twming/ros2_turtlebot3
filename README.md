@@ -38,9 +38,9 @@ calibrate
 ---------
 https://www.youtube.com/watch?v=mQ7O73dEDcU
 ```
-python -m lerobot.calibrate --teleop.type=so101_leader --teleop.port=/dev/ttyACM0 --telop.id=leader
+python -m lerobot.calibrate --teleop.type=so101_leader --teleop.port=/dev/ttyACM0 --teleop.id=leader
 
-python -m lerobot.calibrate --teleop.type=so101_follower --teleop.port=/dev/ttyACM1 --telop.id=follower
+python -m lerobot.calibrate --teleop.type=so101_follower --teleop.port=/dev/ttyACM1 --teleop.id=follower
 
 
 python -m lerobot.teleoperate --robot.type=so101_follower --robot.port=/dev/ttyACM1 --robot.id=follower 
