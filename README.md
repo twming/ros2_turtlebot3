@@ -1,9 +1,12 @@
-how to assemble lerobot
------------------------
-https://www.youtube.com/watch?v=70GuJf2jbYk
-https://huggingface.co/docs/lerobot/installation
-https://github.com/huggingface/lerobot
-https://github.com/Kotakku/FT_SCServo_Debug_Qt
+How to assemble lerobot
+
+- https://www.youtube.com/watch?v=70GuJf2jbYk
+
+- https://huggingface.co/docs/lerobot/installation
+
+- https://github.com/huggingface/lerobot
+
+- https://github.com/Kotakku/FT_SCServo_Debug_Qt
 
 
 install python3.10
