@@ -215,6 +215,11 @@ INFO 2026-03-05 15:23:34 ot_train.py:336 num_learnable_params=51597190 (52M)
 INFO 2026-03-05 15:23:34 ot_train.py:337 num_total_params=51597190 (52M)
 INFO 2026-03-05 15:23:34 ot_train.py:393 Start offline training on a fixed dataset, with effective batch size: 2
 ```
+Optimize Training Speed
+```
+lerobot-train --dataset.repo_id=local/pick_and_place_red_cube --policy.type=act --output_dir=outputs/train/local/pick_and_place_red_cube --job_name=act_so101_test --policy.device=cpu --wandb.enable=false --policy.repo_id=local/pick_and_place_policy --batch_size=2 --num_worker=0 --steps=2000 --policy.n_encoder_layers=2 --policy.n_vae_encoder_layers=2 --policy.dim_model=256 --optimizer.lr=1e-4 --dataset.image_transforms.enable=false 
+
+```
 huggingface-cli upload ${HF_USER}/S0-101-ACT-test output/train/acct_test/checkpoints/last/pretrained_model
 ```
 
