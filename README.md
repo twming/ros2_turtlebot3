@@ -64,11 +64,17 @@ error to access ttyACM0
 sudo usermod -aG dialout $USER
 newgrp dialout
 ```
-training and recording (https://www.youtube.com/watch?v=-tkEMLOLEwo)
-----------------------
+training and recording 
+- https://www.youtube.com/watch?v=-tkEMLOLEwo
+- recording
 ```
-lerobot-record --robot.type=so101_follower --robot.port=/dev/ttyACM1 --robot.id=follower --teleop.type=so101_leader --teleop.port=/dev/ttyACM0 --teleop.id=leader --display_data=true --dataset.repo_id=local/pick2 --dataset.num_episodes=1 --dataset.single_task="Place the blue cube in the orange bowl." --dataset.reset_time_s=5 --dataset.push_to_hub=false
+lerobot-record --robot.type=so101_follower --robot.port=/dev/ttyACM1 --robot.id=follower --teleop.type=so101_leader --teleop.port=/dev/ttyACM0 --teleop.id=leader --display_data=true --dataset.reset_time_s=5 --dataset.push_to_hub=false --dataset.repo_id=local/pick2 --dataset.num_episodes=1 --dataset.single_task="Place the blue cube in the orange bowl."
 ```
+- recording with camera
+```
+lerobot-record --robot.type=so101_follower --robot.port=/dev/ttyACM1 --robot.id=follower --robot.cameras="{ front: {type: opencv, index_or_path: 0, width: 1920, height: 1080, fps: 30}}" --teleop.type=so101_leader --teleop.port=/dev/ttyACM0 --teleop.id=leader --display_data=true --dataset.reset_time_s=5 --dataset.push_to_hub=false --dataset.repo_id=local/pick2 --dataset.num_episodes=1 --dataset.single_task="Place the blue cube in the orange bowl."
+```
+
 ```
 #--resume true
 #--dataset.root=/users/ronanmcgovern/.cache/hugingface/lerobot/Trelis/S0-101-ACT-test
