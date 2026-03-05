@@ -14,6 +14,7 @@ sudo apt update
 sudo apt install software-properties-common
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install python3.10 python3.10-dev python3.10-venv
+sudo apt install ffmpeg
 ```
 
 Setup the lerobot-env
