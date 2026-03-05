@@ -76,12 +76,7 @@ lerobot-record --robot.type=so101_follower --robot.port=/dev/ttyACM1 --robot.id=
 
 ```
 ```
-python -m lerobot.replay 
---robot.type=so101_follower 
---robot.port=/dev/ttyACM1 
---robot.id=follower 
---dataset.repo_id=${HF_USER}/S0-101-ACT-test
---dataset.episode=0
+lerobot-replay --robot.type=so101_follower --robot.port=/dev/ttyACM1 --robot.id=follower --dataset.repo_id=local/pick_cube --dataset.episode=0
 ```
 ```
 python lerobot/scripts/train.py 
