@@ -89,7 +89,7 @@ lerobot-replay --robot.type=so101_follower --robot.port=/dev/ttyACM1 --robot.id=
 
 # Training
 ```
-lerobot-train --dataset.repo_id=local/pick_and_place_red_cube --policy.type=act --output_dir=outputs/train/local/pick_and_place_red_cube --job_name=act_so101_test --policy.device=cuda --wandb.enable=false --policy.repo_id=local/pick_and_place_policy --batch_size=2 --num_worker=0
+lerobot-train --dataset.repo_id=local/pick_and_place_red_cube --policy.type=act --output_dir=outputs/train/local/pick_and_place_red_cube --job_name=act_so101_test --policy.device=cuda --wandb.enable=false --policy.repo_id=local/pick_and_place_policy --batch_size=2 --num_worker=0 --policy.push_to_hub=false
 ```
 ```
 INFO 2026-03-05 15:23:32 ot_train.py:195 {'batch_size': 2,
@@ -252,7 +252,7 @@ Your config shows image_transforms are enabled (RandomAffine, ColorJitter, etc.)
     Why: Calculating rotations and color shifts on every batch is a heavy CPU task. For a quick test, skip it.
 
 ```
-lerobot-train --dataset.repo_id=local/pick_and_place_red_cube --policy.type=act --output_dir=outputs/train/local/pick_and_place_red_cube --job_name=act_so101_test --policy.device=cpu --wandb.enable=false --policy.repo_id=local/pick_and_place_policy --batch_size=2 --num_worker=0 --steps=2000 --policy.n_encoder_layers=2 --policy.n_vae_encoder_layers=2 --policy.dim_model=256 --optimizer.lr=1e-4 --dataset.image_transforms.enable=false 
+lerobot-train --dataset.repo_id=local/pick_and_place_red_cube --policy.type=act --output_dir=outputs/train/local/pick_and_place_red_cube --job_name=act_so101_test --policy.device=cpu --wandb.enable=false --policy.repo_id=local/pick_and_place_policy --batch_size=2 --num_worker=0 --steps=2000 --policy.n_encoder_layers=2 --policy.n_vae_encoder_layers=2 --policy.dim_model=256 --optimizer.lr=1e-4 --dataset.image_transforms.enable=false --policy.push_to_hub=false
 
 ```
 huggingface-cli upload ${HF_USER}/S0-101-ACT-test output/train/acct_test/checkpoints/last/pretrained_model
