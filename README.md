@@ -216,6 +216,41 @@ INFO 2026-03-05 15:23:34 ot_train.py:337 num_total_params=51597190 (52M)
 INFO 2026-03-05 15:23:34 ot_train.py:393 Start offline training on a fixed dataset, with effective batch size: 2
 ```
 Optimize Training Speed
+
+1. Reduce Training Steps (The "Fast-Track")
+
+Your current config is set to steps=100000. For a small local dataset of 5 episodes (912 frames), 100k steps is massive over-optimization.
+
+    Optimization: Set --steps=5000 or even --steps=2000.
+
+    Why: With only 5 episodes, the model will likely "memorize" the data (overfit) very quickly. You’ll see if it’s working much sooner.
+
+2. Optimize the ACT Architecture
+
+ACT is a "heavy" policy because of its Transformer layers. You can make it "skinnier" to speed up the math:
+
+    Reduce Layers: Set --policy.n_encoder_layers=2 (down from 4) and --policy.n_vae_encoder_layers=2.
+
+    Reduce Hidden Dim: Set --policy.dim_model=256 (down from 512).
+
+    Why: This significantly reduces the number of matrix multiplications the CPU has to perform every iteration.
+
+3. Increase the Learning Rate
+
+If you reduce the number of steps, you need the model to learn faster.
+
+    Optimization: Set --optimizer.lr=1e-4 (up from 1e-5).
+
+    Why: A higher learning rate allows the weights to converge in fewer iterations, though it can be less stable.
+
+4. Disable Image Augmentation
+
+Your config shows image_transforms are enabled (RandomAffine, ColorJitter, etc.).
+
+    Optimization: Set --dataset.image_transforms.enable=false.
+
+    Why: Calculating rotations and color shifts on every batch is a heavy CPU task. For a quick test, skip it.
+
 ```
 lerobot-train --dataset.repo_id=local/pick_and_place_red_cube --policy.type=act --output_dir=outputs/train/local/pick_and_place_red_cube --job_name=act_so101_test --policy.device=cpu --wandb.enable=false --policy.repo_id=local/pick_and_place_policy --batch_size=2 --num_worker=0 --steps=2000 --policy.n_encoder_layers=2 --policy.n_vae_encoder_layers=2 --policy.dim_model=256 --optimizer.lr=1e-4 --dataset.image_transforms.enable=false 
 
