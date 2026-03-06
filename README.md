@@ -251,6 +251,21 @@ Your config shows image_transforms are enabled (RandomAffine, ColorJitter, etc.)
 
     Why: Calculating rotations and color shifts on every batch is a heavy CPU task. For a quick test, skip it.
 
+# HuggingFace Login
+```
+huggingface-cli login --token hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --add-to-git-credential
+```
+
+# Create Local Repository
+```
+git config --global credential.helper stor
+```
+
+# Upload to Repository
+```
+huggingface-cli upload twming/pick_and_place_red_cube ~/.cache/huggingface/lerobot/local/pick_and_place_red_cube --repo-type dataset
+```
+
 ```
 lerobot-train --dataset.repo_id=local/pick_and_place_red_cube --policy.type=act --output_dir=outputs/train/local/pick_and_place_red_cube --job_name=act_so101_test --policy.device=cpu --wandb.enable=false --policy.repo_id=local/pick_and_place_policy --batch_size=2 --num_worker=0 --steps=2000 --policy.n_encoder_layers=2 --policy.n_vae_encoder_layers=2 --policy.dim_model=256 --optimizer.lr=1e-4 --dataset.image_transforms.enable=false --policy.push_to_hub=false
 
